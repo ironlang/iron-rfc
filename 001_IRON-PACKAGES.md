@@ -116,3 +116,11 @@ public let package = Package{
 	]
 }
 ```
+
+These packages can then be referenced as such:
+```iron
+import mail::imap
+import someothermail::Message
+
+// do something with the imap module and the Message type
+```

@@ -70,7 +70,7 @@ An Iron package contains one or many _modules_ that are versioned and distribute
 If our package depends on the third-party `mail` module, that can be expressed in this `package.fe` file like so:
 
 ```iron
-import package::Package
+import package_description::Package
 
 public let package = Package{
 	dependencies: [
@@ -79,8 +79,40 @@ public let package = Package{
 }
 ```
 
-The `package` module, which contains the `Package` structure type, will be part of the standard library (or, standard package). With this information, Forge will be able to retrieve the `mail` package dependency that meets the version requirement described in our `package.fe` file.
+The `package_description` module, which contains the `Package` structure type, will be part of the standard library (or, standard package). With this information, Forge will be able to retrieve the `mail` package dependency that meets the version requirement described in our `package.fe` file.
 
 ### Dealing with package naming conflicts
 
-TODO
+By default, the name of a package will be used similar to how modules already work. When you add `https://github.com/ironlang/mail` as a package dependency, it can be used as described above:
+
+```iron
+import mail::imap
+
+// do something with the imap module
+```
+
+However, what if you need functionality from two different `mail` packages?
+
+```iron
+import package::Package
+
+public let package = Package{
+	dependencies: [
+		.package("https://github.com/ironlang/mail", from: "1.0.0")
+		.package("https://github.com/someotherirondeveloper/mail", from: "1.0.0")
+	]
+}
+```
+
+**Attempting to fetch these dependencies will cause an error.** To make Forge happy, you will have to _alias_ one of them (or both, if you choose).
+
+```iron
+import package::Package
+
+public let package = Package{
+	dependencies: [
+		.package("https://github.com/ironlang/mail", from: "1.0.0")
+		.package("https://github.com/someotherdeveloper/mail", as: "someothermail", from: "1.0.0")
+	]
+}
+```

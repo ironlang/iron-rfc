@@ -74,9 +74,13 @@ import package::Package
 
 public let package = Package{
 	dependencies: [
-		.git("https://github.com/ironlang/mail", from: "1.0.0")
+		.package("https://github.com/ironlang/mail", from: "1.0.0")
 	]
 }
 ```
 
 The `package` module, which contains the `Package` structure type, will be part of the standard library (or, standard package). With this information, Forge will be able to retrieve the `mail` package dependency that meets the version requirement described in our `package.fe` file.
+
+### Dealing with package naming conflicts
+
+TODO

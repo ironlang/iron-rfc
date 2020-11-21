@@ -62,8 +62,21 @@ The _package_ is the highest level of abstraction in Iron software systems. They
 
 ```sh
 # Create a new Iron package
-forge init <package-name>
+forge new package <package-name>
 ```
 
-An Iron package contains one or many _modules_ that are versioned and distributed together via Git.
+An Iron package contains one or many _modules_ that are versioned and distributed together via Git. At the "package root," which is also the root of the Git repository, we find a new file: **`package.fe`**.
 
+If our package depends on the third-party `mail` module, that can be expressed in this `package.fe` file like so:
+
+```iron
+import package::Package
+
+public let package = Package{
+	dependencies: [
+		.git("https://github.com/ironlang/mail", from: "1.0.0")
+	]
+}
+```
+
+The `package` module, which contains the `Package` structure type, will be part of the standard library (or, standard package). With this information, Forge will be able to retrieve the `mail` package dependency that meets the version requirement described in our `package.fe` file.

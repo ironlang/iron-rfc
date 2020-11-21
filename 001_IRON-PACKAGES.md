@@ -8,9 +8,9 @@ Iron should make it easy to design reusable software components and distribute t
 
 As a motivating example, consider a `mail` module that defines functionality for implementing clients and servers that communicate using IMAP and SMTP protocols. While such a module could be considered for inclusion in the Iron standard library, we will assume for now that this is an independent implementation. This is an important assumption, because I hope for the standard library to be driven largely by independent innovations and contributions.
 
-Anyway, consider the structure of this hypothetical `mail` module.
+Anyway, consider the (drastically simplified) structure of this hypothetical `mail` module.
 
-```
+```sh
 mail/
 ├── imap/
 │   └── module.fe

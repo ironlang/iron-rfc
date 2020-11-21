@@ -48,7 +48,9 @@ TODO
 
 ### Swift: Swift Package Manager
 
-TODO
+#### Library vs. binary targets
+
+SPM allows you to differentiate between library (meant to be imported) and binary (meant to be executed) targets. Iron does not do this; instead, any Iron module that defines a `public function main` can be run as an executable.
 
 ### Rust: Cargo
 
